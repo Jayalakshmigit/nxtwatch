@@ -3,6 +3,8 @@
         "container",
         "el",
         "from",
-        "input"
+        "input",
+        "reactjs",
+        "roboto"
     ]
 }
