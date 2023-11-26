@@ -32,6 +32,7 @@ export const InputEl = styled.input`
   border-radius: 4px;
   margin-top: 5px;
   font-weight: 500;
+  padding: 5px;
 `
 
 export const ImageEl = styled.img`

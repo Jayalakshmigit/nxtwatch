@@ -3,7 +3,7 @@ import {Cookies} from 'js-cookie'
 import Popup from 'reactjs-popup'
 
 import {BsMoon, BsBrightnessHigh} from 'react-icons/bs'
-import {FiLogout} from 'react-icons/fi'
+import {FiLogOut} from 'react-icons/fi'
 
 import ThemeChange from '../../context/ThemeChange'
 
@@ -105,8 +105,7 @@ const Header = props => (
               modal
               trigger={
                 <LogoutIcon type="button">
-                  <FiLogout size={25} />
-                  color={color}
+                  <FiLogOut size={25} color={color} />
                 </LogoutIcon>
               }
               className="popup-content"

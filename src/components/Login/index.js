@@ -97,9 +97,9 @@ class Login extends Component {
         <InputEl
           type={passwordType}
           id="password"
-          placeholder="Username"
+          placeholder="Password"
           value={password}
-          onChange={this.onChangeUsername}
+          onChange={this.onChangePassword}
         />
         <CheckboxContainer>
           <Checkbox

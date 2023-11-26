@@ -7,8 +7,8 @@ import {
   NotFoundParagraph,
 } from './styledComponents'
 
-const NotFound = () => {
-  ;<ThemeChange.Consumer>
+const NotFound = () => (
+  <ThemeChange.Consumer>
     {value => {
       const {activeTheme} = value
       const backgroundColor = activeTheme === 'light' ? '#ffffff' : '#000000'
@@ -34,6 +34,6 @@ const NotFound = () => {
       )
     }}
   </ThemeChange.Consumer>
-}
+)
 
 export default NotFound
