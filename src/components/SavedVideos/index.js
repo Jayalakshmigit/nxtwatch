@@ -1,72 +1,100 @@
-import {CgPlayListAdd} from 'react-icons/cg'
-
+import {Component} from 'react'
+import {Loader} from 'react-loader-spinner'
+import {AiFillFire} from 'react-icons/ai'
 import Header from '../Header'
-import NavigationBar from '../NavigationBar'
-import VideosCard from '../VideosCard'
+import SideBar from '../SideBar'
+import VideoCard from '../VideoCard'
 
 import ThemeChange from '../../context/ThemeChange'
 
 import {
+  SearchVideosContainer,
   SavedVideosContainer,
-  SavedVideosTitleIconContainer,
-  SavedVideosTitle,
-  SavedVideosListItems,
-  SavedVideosText,
-  NoSavedVideosView,
-  NoSavedVideosImage,
-  NoSavedVideosHeading,
-  NoSavedVideosNote,
+  LoaderContainer,
+  HomeSideContainer,
+  HomeStickyContainer,
+  HomeContainer,
+  TrendingHeadingContainer,
+  TrendingLogo,
+  TrendingHeading,
+  NotFoundContainer,
+  Image,
+  Heading,
+  Desc,
 } from './styledComponents'
 
-const SavedVideos = () => (
-  <ThemeChange.Consumer>
-    {value => {
-      const {activeTheme, savedVideos} = value
-      const backgroundColor = activeTheme ? '#0f0f0f0f' : '#f9f9f9'
-      const textColor = activeTheme ? '#f9f9f9' : '#231f20'
-      const headingColor = activeTheme ? '#f1f5f9' : '#1e293b'
-      const noteColor = activeTheme ? '#e2e8f0' : '#475569'
+const SavedVideos = () => {
+  renderSavedVideos = () => (
+    <ThemeChange.Consumer>
+      {value => {
+        const {activeTheme, savedVideos} = value
+        const backgroundColor = activeTheme ? '#0f0f0f0f' : '#f9f9f9f9'
+        const color = activeTheme ? ' #f9f9f9' : '#181818'
 
-      return (
-        <>
-          <Header />
-          <NavigationBar />
-          <SavedVideosContainer
-            data-testid="savedVideos"
-            backgroundColor={backgroundColor}
-          >
-            <SavedVideosTitle>
-              <SavedVideosTitleIconContainer>
-                <CgPlayListAdd size={35} color="#ff0000" />
-              </SavedVideosTitleIconContainer>
-              <SavedVideosText color={textColor}>Saved Videos</SavedVideosText>
-            </SavedVideosTitle>
-            {savedVideos.length > 0 ? (
-              <SavedVideosListItems>
-                {SavedVideos.map(eachVideo => (
-                  <VideosCard key={eachVideo.id} videos={eachVideo} />
-                ))}
-              </SavedVideosListItems>
-            ) : (
-              <NoSavedVideosView>
-                <NoSavedVideosImage
-                  src="https://assets.ccbp.in/frontend/react-js/nxt-watch-no-saved-videos-img.png"
-                  alt="no saved videos"
-                />
+        const videosAvailable = savedVideos.length === 0
+        return videosAvailable ? (
+          <NotFoundContainer backgroundColor={backgroundColor}>
+            <Image
+              src="https://assets.ccbp.in/frontend/react-js/nxt-watch-no-saved-videos-img.png"
+              alt="no saved videos"
+            />
+            <Heading className="cart-empty-heading" color={color}>
+              No saved videos found
+            </Heading>
+            <Desc color={color}>
+              You can save your videos while watching them.
+            </Desc>
+          </NotFoundContainer>
+        ) : (
+          <SearchVideosContainer backgroundColor={backgroundColor}>
+            <TrendingHeadingContainer backgroundColor={backgroundColor}>
+              <TrendingLogo>
+                <AiFillFire size={25} />
+              </TrendingLogo>
+              <TrendingHeading color={color}>Saved Videos</TrendingHeading>
+            </TrendingHeadingContainer>
 
-                <NoSavedVideosHeading headingColor={headingColor}>
-                  No saved videos found
-                </NoSavedVideosHeading>
-                <NoSavedVideosNote noteColor={noteColor}>
-                  You can save your videos while watching them
-                </NoSavedVideosNote>
-              </NoSavedVideosView>
-            )}
-          </SavedVideosContainer>
-        </>
+            <SavedVideosContainer backgroundColor={backgroundColor}>
+              {savedVideos.map(eachVideo => (
+                <VideoCard key={eachVideo.id} videoCardDetails={eachVideo} />
+              ))}
+            </SavedVideosContainer>
+          </SearchVideosContainer>
+        )
+      }}
+    </ThemeChange.Consumer>
+  )
+
+  renderLoadingView = () => (
+    <LoaderContainer className="loader-container" data-testid="loader">
+      <Loader type="ThreeDots" color="#ffffff" height="50" width="50" />
+    </LoaderContainer>
+  )
+
+  render() {
+      return(
+          <ThemeChange.Consumer>
+              {value =>{
+                  const {activeTheme} = value
+                  const backgroundColor = activeTheme ? '#0f0f0f0f' : '#f9f9f9f9'
+
+                  return(
+                      <div data-testid = "savedVideos">
+                          <Header/>
+                          <HomeContainer data-testid = "home" backgroundColor = {backgroundColor}>
+                              <HomeStickyContainer>
+                                  <SideBar/>
+                              </HomeStickyContainer>
+                              <HomeSideContainer backgroundColor={backgroundColor}>
+                                  {this.renderSavedVideos()}
+                              </HomeSideContainer>
+                          </HomeContainer>
+                      </div>
+                  )
+              }}
+          </ThemeChange.Consumer>
       )
-    }}
-  </ThemeChange.Consumer>
-)
+  }
+}
 
 export default SavedVideos

@@ -1,77 +1,96 @@
 import styled from 'styled-components'
 
-export const SavedVideosContainer = styled.div`
-  min-height: 100vh;
+export const SearchVideosContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+  padding: 30px;
   background-color: ${props => props.backgroundColor};
-  margin-top: 60px;
-  margin-bottom: 60px;
-  overflow-y: auto;
-
-  @media screen and (min-width: 768px) {
-    margin-left: 250px;
-    margin-bottom: 0px;
-  }
-`
-export const SavedVideosTitle = styled.div`
-  display: flex;
-  align-items: center;
 `
 
-export const SavedVideosTitleIconContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 40px;
-  width: 40px;
-  margin-left: 10px;
-  margin-right: 10px;
-  border-radius: 80px;
-
-  @media screen and (min-width: 768px) {
-    margin-left: 40px;
-  }
-`
-export const SavedVideosListItems = styled.ul`
+export const SavedVideosContainer = styled.ul`
   display: flex;
   flex-direction: column;
   list-style-type: none;
-  margin: 0px;
-  padding: 0px;
 `
 
-export const SavedVideosText = styled.h1`
+export const Image = styled.img`
+  width: 250px;
+  margin: 10px;
+`
+
+export const TrendingHeadingContainer = styled.div`
+  display: flex;
+  align-items: center;
+  height: 100px;
+  width: 100%;
+  margin-left: 50px;
+  background-color: ${props => props.backgroundColor};
+`
+
+export const TrendingLogo = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  width: 50px;
+  border: 0px none;
+  border-radius: 50px;
+  background-color: #94a3b8;
+  margin: 10px;
+`
+
+export const TrendingHeading = styled.h1`
   color: ${props => props.color};
-  font-size: 25px;
+  font-weight: bold;
   font-family: 'Roboto';
+`
+
+export const Heading = styled.h1`
+  color: ${props => props.color};
+  font-size: 30px;
+  margin: 15px;
+`
+
+export const Desc = styled.p`
+  color: ${props => props.color};
+  font-size: 20px;
+  margin: 15px;
+`
+export const LoaderContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 
   @media screen and (min-width: 768px) {
-    font-size: 35px;
+    width: 70%;
   }
 `
-export const NoSavedVideosView = styled.div`
+
+export const HomeStickyContainer = styled.div`
+  position: sticky;
+  position: -webkit-sticky;
+`
+
+export const HomeSideContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background-color: ${props => props.backgroundColor};
+  overflow-y: scroll;
+`
+
+export const HomeContainer = styled.div`
+  display: flex;
+  width: 100%;
+  background-color: ${props => props.backgroundColor};
+`
+export const NotFoundContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: none;
-`
-
-export const NoSavedVideosImage = styled.img`
-  width: 200px;
-
-  @media screen and (min-width: 768px) {
-    width: 450px;
-  }
-`
-export const NoSavedVideosHeading = styled.h1`
-  color: ${props => props.headingColor};
-  font-size: 25px;
-  font-family: 'Roboto';
-  text-align: center;
-`
-export const NoSavedVideosNote = styled.p`
-  color: ${props => props.noteColor};
-  font-size: 18px;
-  font-family: 'Roboto';
-  text-align: center;
+  height: 100vh;
+  background-color: #ffffff;
 `

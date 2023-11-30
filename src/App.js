@@ -17,7 +17,7 @@ class App extends Component {
   state = {
     savedVideos: [],
     activeTheme: 'light',
-    activeTab: 'Home',
+    activeTab: 'HOME',
   }
 
   changeTab = tab => {
@@ -30,27 +30,26 @@ class App extends Component {
     }))
   }
 
-  addVideo = video => {
+  addToSaveVideos = video => {
     const {savedVideos} = this.state
-    const index = savedVideos.findIndex(eachVideo => eachVideo.id === video.id)
+    const videoObject = savedVideos.find(eachVideo => eachVideo.id === video.id)
 
-    if (index === -1) {
-      this.setState({savedVideos: [...savedVideos, video]})
-    } else {
-      savedVideos.splice(index, 1)
-      this.setState({savedVideos})
-    }
-  }
+   if(videoObject){
+       this.setState(prevState=>({savedVideos:[...prevState.savedVideos],
+    }))
+   }else{
+    this.setState({savedVideos:[...savedVideos,video]})
+   }
 
-  removeVideo = id => {
+  removeSaveVideos = id => {
     const {savedVideos} = this.state
     const updatedSavedVideos = savedVideos.filter(
       eachVideo => eachVideo.id !== id,
     )
     this.setState({savedVideos: updatedSavedVideos})
   }
-
-  render() {
+  
+  render(){
     const {savedVideos, activeTheme, activeTab} = this.state
 
     return (
@@ -60,7 +59,8 @@ class App extends Component {
           activeTheme,
           activeTab,
           changeTheme: this.changeTheme,
-          addVideo: this.addVideo,
+          removeSaveVideos:this.removeSaveVideos
+          addToSaveVideos: this.addToSaveVideo,
           changeTab: this.changeTab,
         }}
       >

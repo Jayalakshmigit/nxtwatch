@@ -1,7 +1,7 @@
 import {Link} from 'react-router-dom'
 import styled from 'styled-components'
 
-export const GamingCardContainer = styled.li`
+export const VideoCardContainer = styled.li`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -20,19 +20,19 @@ export const ThumbnailImage = styled.img`
   object-fit: fill;
 `
 
-export const GamingCardBottomContainer = styled.div`
+export const VideoCardBottomContainer = styled.div`
   display: flex;
   width: 100%;
   align-items: center;
 `
 
-export const GamingCardDetailsContainer = styled.div`
+export const VideoCardDetailsContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin-left: 25px;
 `
 
-export const GamingCardText = styled.p`
+export const VideoCardText = styled.p`
   color: #475569;
   font-size: 15px;
   font-family: 'Roboto';

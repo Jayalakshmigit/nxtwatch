@@ -5,10 +5,11 @@ const ThemeChange = React.createContext({
   changeTheme: () => {},
 
   savedVideos: [],
-  addSavedVideos: () => {},
+  addToSaveVideos: () => {},
 
   activeTab: 'Home',
   changeTab: () => {},
+  removeSaveVideos: () => {},
 })
 
 export default ThemeChange

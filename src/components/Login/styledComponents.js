@@ -6,10 +6,15 @@ export const AppContainer = styled.div`
   justify-content: center;
   align-items: center;
   height: 100vh;
-  width: 100vw;
+  width: 90%;
   max-width: 1110px;
   margin: auto;
-  background-color: #ffffff;
+  margin: auto;
+
+  @media screen and (min-width: 992px) {
+    flex-direction: row;
+    justify-content: space-around;
+  }
 `
 
 export const LabelEl = styled.label`
@@ -17,40 +22,36 @@ export const LabelEl = styled.label`
   font-size: 12px;
   font-family: 'Roboto';
   font-weight: 500;
-  padding: 8px;
-  border: 1px solid #94a3b8;
-  border-radius: 4px;
-  margin-top: 5px;
+  line-height: 16px;
+  margin-bottom: 0px;
 `
 export const InputEl = styled.input`
-  color: #475569;
-  font-size: 15px;
-  font-family: 'Roboto';
-  outline: none;
-  padding: 8px;
-  border: 1px solid #94a3b8;
-  border-radius: 4px;
+  color: #64748b;
+  font-size: 14px;
+  height: 40px;
+  border-radius: 2px;
   margin-top: 5px;
-  font-weight: 500;
-  padding: 5px;
+  padding: 8px 16px 8px 16px;
+  outline: none;
+  background-color: #e2e8f0;
+  border: 1px solid #d7dfe9;
 `
 
 export const ImageEl = styled.img`
-  align-self: center;
-  width: 180px;
-  margin-bottom: 15px;
+  width: 185px;
 `
-export const Checkbox = styled.div`
-  height: 15px;
-  width: 15px;
-  margin-right: 5px;
+export const Checkbox = styled.input`
+  margin-right: 4px;
 `
 export const ShowPassword = styled.label`
-  color: #1e293b;
-  font-size: 15px;
+  color: #475569;
+  font-size: 12px;
   font-family: 'Roboto';
+  font-weight: 500;
+  line-height: 16px;
+  margin-bottom: 0px;
 `
-export const FormContainer = styled.div`
+export const FormContainer = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -58,11 +59,19 @@ export const FormContainer = styled.div`
   border-radius: 8px;
   width: 100%;
   max-width: 350px;
-  background-color: transparent;
+
+  @media screen and (min-width: 992px) {
+    width: 350px;
+    flex-shrink: 0;
+    box-shadow: 0px 8px 40px;
+    padding: 64px 48px 64px 48px;
+  }
 `
 export const InputContainer = styled.div`
+  display: flex;
+  flex-direction: column;
   width: 100%;
-  margin-top: 15px;
+  margin-top: 20px;
 `
 
 export const CheckboxContainer = styled.div`
@@ -79,7 +88,7 @@ export const LoginButtonEl = styled.button`
   width: 100%;
   margin-top: 20px;
   margin-bottom: 2px;
-  background-color: #4f46e5;
+  background-color: #0b69ff;
   border-radius: 8px;
   border: none;
   outline: none;

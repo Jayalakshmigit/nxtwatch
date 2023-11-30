@@ -2,23 +2,27 @@ import {Component} from 'react'
 import Cookies from 'js-cookie'
 import Loader from 'react-loader-spinner'
 
-import {SiYoutubegaming} from 'react-icons/si'
-
 import Header from '../Header'
-import ThemeChange from '../../context/ThemeChange'
 import GamingCard from '../GamingCard'
-import NavigationBar from '../NavigationBar'
+import SideBar from '../SideBar'
 
-import FailureView from '../FailureView'
+import ThemeChange from '../../context/ThemeChange'
 
 import './index.css'
 
 import {
-  GamingContainer,
-  GamingHeadingIconContainer,
-  GamingHeadingContainer,
-  GamingListItems,
-  GamingDescription,
+  SearchVideosContainer,
+  LoaderContainer,
+  VideosContainer,
+  HomeStickyContainer,
+  HomeSideContainer,
+  HomeContainer,
+  NotFoundContainer,
+  Image,
+  Heading,
+  Desc,
+  Retry,
+  NavLink,
 } from './styledComponents'
 
 const apiStatusConstants = {
@@ -56,6 +60,7 @@ class Gaming extends Component {
         title: eachVideo.title,
         thumbnailUrl: eachVideo.thumbnail_url,
         viewCount: eachVideo.views_count,
+        publishedAt: eachVideo.published_at,
       }))
       this.setState({
         gamingVideos: updatedData,
@@ -67,34 +72,65 @@ class Gaming extends Component {
   }
 
   renderLoadingView = () => (
-    <div className="loader-container" data-testid="loader">
-      <Loader type="ThreeDots" color="#ffffff" height="50" width="50" />
-    </div>
+    <LoaderContainer>
+      <div className="loader-container" data-testid="loader">
+        <Loader type="ThreeDots" color="#ffffff" height="50" width="50" />
+      </div>
+    </LoaderContainer>
   )
 
-  renderGamingVideosView = () => {
-    const {gamingVideos} = this.state
-    return (
-      <GamingListItems>
-        {gamingVideos.map(eachVideo => (
-          <GamingCard key={eachVideo.id} GamingCardVideoDetails={eachVideo} />
-        ))}
-      </GamingListItems>
-    )
-  }
+  renderGamingVideos = () => (
+    <ThemeChange.Consumer>
+      {value => {
+        const {activeTheme} = value
+        const {gamingVideos} = this.state
+        const backgroundColor = activeTheme ? '#231f20' : '#0f0f0f0f'
 
-  onRetry = () => {
-    this.getGamingVideos()
-  }
+        return (
+          <SearchVideosContainer
+            data-testid="gaming"
+            backgroundColor={backgroundColor}
+          >
+            <Heading>Gaming</Heading>
+            <VideosContainer backgroundColor={backgroundColor}>
+              {gamingVideos.map(eachVideo => (
+                <GamingCard
+                  key={eachVideo.id}
+                  gamingCardVideoDetails={eachVideo}
+                />
+              ))}
+            </VideosContainer>
+          </SearchVideosContainer>
+        )
+      }}
+    </ThemeChange.Consumer>
+  )
 
-  renderFailureView = () => <FailureView onRetry={this.onRetry} />
+  renderFailureView = () => (
+    <NotFoundContainer>
+      <Image
+        src="https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-light-theme-img.png"
+        alt="failure view"
+        className="failure-view-gaming"
+      />
+      <Heading> Oops! Something Went Wrong</Heading>
+      <Desc className="failure-description-gaming">
+        We are having some trouble to complete your request. Please try again.
+      </Desc>
+      <NavLink>
+        <Retry className="button" type="button" onClick={this.getGamingVideos}>
+          Retry
+        </Retry>
+      </NavLink>
+    </NotFoundContainer>
+  )
 
-  renderGamingVideosView = () => {
+  renderAllGamingVideosView = () => {
     const {apiStatus} = this.state
 
     switch (apiStatus) {
       case apiStatusConstants.success:
-        return this.renderGamingVideosView()
+        return this.renderGamingVideos()
       case apiStatusConstants.failure:
         return this.renderFailureView()
       case apiStatusConstants.inProgress:
@@ -110,25 +146,22 @@ class Gaming extends Component {
         {value => {
           const {activeTheme} = value
           const backgroundColor = activeTheme ? '#0f0f0f0f' : '#f9f9f9f9'
-          const color = activeTheme ? '#f9f9f9' : '#231f20'
 
           return (
-            <>
+            <div data-testid="home">
               <Header />
-              <NavigationBar />
-              <GamingContainer
-                data-testid="gaming"
+              <HomeContainer
+                data-test-id="home"
                 backgroundColor={backgroundColor}
               >
-                <GamingHeadingContainer>
-                  <GamingHeadingIconContainer>
-                    <SiYoutubegaming size={35} color="#ff0000" />
-                  </GamingHeadingIconContainer>
-                  <GamingDescription color={color}>Gaming</GamingDescription>
-                </GamingHeadingContainer>
-                {this.renderGamingVideosView()}
-              </GamingContainer>
-            </>
+                <HomeStickyContainer>
+                  <SideBar />
+                </HomeStickyContainer>
+                <HomeSideContainer backgroundColor={backgroundColor}>
+                  {this.renderAllGamingVideosView()}
+                </HomeSideContainer>
+              </HomeContainer>
+            </div>
           )
         }}
       </ThemeChange.Consumer>

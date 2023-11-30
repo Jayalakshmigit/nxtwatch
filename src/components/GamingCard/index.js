@@ -1,44 +1,27 @@
-import ThemeChange from '../../context/ThemeChange'
-
 import {
-  GamingCardItemLink,
-  GamingCardListItem,
-  GamingCardThumbnailImage,
-  GamingCardContent,
-  GamingCardHeading,
-  GamingCardViewsAndDate,
+  GamingCardContainer,
+  ThumbnailImage,
+  GamingCardBottomContainer,
+  GamingCardDetailsContainer,
+  GamingCardText,
+  NavLink,
 } from './styledComponents'
 
 const GamingCard = props => {
-  const {GamingCardVideoDetails} = props
-  const {id, title, thumbnailUrl, viewCount} = GamingCardVideoDetails
-
+  const {gamingCardVideoDetails} = props
+  const {title, id, thumbnailUrl, viewCount} = gamingCardVideoDetails
   return (
-    <ThemeChange.Consumer>
-      {value => {
-        const {activeTheme} = value
-        const gamingCardHeadingColor = activeTheme ? '#f9f9f9' : '#231f20'
-
-        return (
-          <GamingCardItemLink to={`/videos/${id}`} className="link">
-            <GamingCardListItem>
-              <GamingCardThumbnailImage
-                src={thumbnailUrl}
-                alt="video thumbnail"
-              />
-              <GamingCardContent>
-                <GamingCardHeading color={gamingCardHeadingColor}>
-                  {title}
-                </GamingCardHeading>
-                <GamingCardViewsAndDate color={gamingCardHeadingColor}>
-                  {viewCount} Watching WorldWide
-                </GamingCardViewsAndDate>
-              </GamingCardContent>
-            </GamingCardListItem>
-          </GamingCardItemLink>
-        )
-      }}
-    </ThemeChange.Consumer>
+    <NavLink to={`videos/${id}`}>
+      <GamingCardContainer>
+        <ThumbnailImage src={thumbnailUrl} alt="video thumbnail" />
+        <GamingCardBottomContainer>
+          <GamingCardDetailsContainer>
+            <GamingCardText>{title}</GamingCardText>
+            <GamingCardText>{viewCount} views</GamingCardText>
+          </GamingCardDetailsContainer>
+        </GamingCardBottomContainer>
+      </GamingCardContainer>
+    </NavLink>
   )
 }
 

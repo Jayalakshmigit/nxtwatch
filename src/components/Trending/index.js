@@ -2,21 +2,29 @@ import {Component} from 'react'
 import Cookies from 'js-cookie'
 import Loader from 'react-loader-spinner'
 
-import {HiFire} from 'react-icons/hi'
+import {AiFillFire} from 'react-icons/ai'
 
 import Header from '../Header'
-import NavigationBar from '../NavigationBar'
-import VideosCard from '../VideosCard'
+import SideBar from '../SideBar'
+import VideoCard from '../VideoCard'
 import ThemeChange from '../../context/ThemeChange'
 
-import FailureView from '../FailureView'
-
 import {
-  TrendingContainer,
-  TrendingTitleIconContainer,
-  TrendingVideoTitle,
-  TrendingVideoList,
-  TrendingText,
+  SearchVideosContainer,
+  VideosContainer,
+  LoaderContainer,
+  HomeSideContainer,
+  HomeStickyContainer,
+  HomeContainer,
+  TrendingHeadingContainer,
+  TrendingLogo,
+  TrendingHeading,
+  NotFoundContainer,
+  Image,
+  Heading,
+  Desc,
+  Retry,
+  NavLink,
 } from './styledComponents'
 
 const apiStatusConstants = {
@@ -28,15 +36,15 @@ const apiStatusConstants = {
 
 class Trending extends Component {
   state = {
-    trendingVideos: [],
+    searchedVideos: [],
     apiStatus: apiStatusConstants.initial,
   }
 
   componentDidMount() {
-    this.getTrendingVideos()
+    this.getSuggestionVideos()
   }
 
-  getTrendingVideos = async () => {
+  getSuggestionVideos = async () => {
     this.setState({apiStatus: apiStatusConstants.inProgress})
     const jwtToken = Cookies.get('jwt_token')
     const url = `https://apis.ccbp.in/videos/trending`
@@ -46,20 +54,24 @@ class Trending extends Component {
       },
       method: 'GET',
     }
+
     const response = await fetch(url, options)
     if (response.ok) {
       const data = await response.json()
       const updatedData = data.videos.map(eachVideo => ({
         id: eachVideo.id,
+        channel: {
+          name: eachVideo.channel.name,
+          profileImageUrl: eachVideo.channel.profile_image_url,
+        },
+
         title: eachVideo.title,
         thumbnailUrl: eachVideo.thumbnail_url,
         viewCount: eachVideo.views_count,
         publishedAt: eachVideo.published_at,
-        name: eachVideo.name,
-        profileImageUrl: eachVideo.channel.profile_image_url,
       }))
       this.setState({
-        trendingVideos: updatedData,
+        searchedVideos: updatedData,
         apiStatus: apiStatusConstants.success,
       })
     } else {
@@ -68,27 +80,67 @@ class Trending extends Component {
   }
 
   renderLoadingView = () => (
-    <div className="loader-container" data-testid="loader">
-      <Loader type="ThreeDots" color="#ffffff" height="50" width="50" />
-    </div>
+    <LoaderContainer>
+      <div className="loader-container" data-testid="loader">
+        <Loader type="ThreeDots" color="#ffffff" height="50" width="50" />
+      </div>
+    </LoaderContainer>
   )
 
   renderTrendingVideosView = () => {
-    const {trendingVideos} = this.state
+    const {searchedVideos} = this.state
     return (
-      <TrendingVideoList>
-        {trendingVideos.map(eachVideo => (
-          <VideosCard key={eachVideo.id} videos={eachVideo} />
-        ))}
-      </TrendingVideoList>
+      <ThemeChange.Consumer>
+        {value => {
+          const {activeTheme} = value
+          const backgroundColor = activeTheme ? '#231f20' : '#f9f9f9'
+          const textColor = activeTheme ? '#f9f9f9' : ' #18181818'
+
+          return (
+            <SearchVideosContainer
+              data-testid="trending"
+              backgroundColor={backgroundColor}
+            >
+              <TrendingHeadingContainer
+                color={textColor}
+                backgroundColor={backgroundColor}
+              >
+                <TrendingLogo>
+                  <AiFillFire size={25} />
+                  <TrendingHeading color={textColor}>Trending</TrendingHeading>
+                </TrendingLogo>
+              </TrendingHeadingContainer>
+
+              <VideosContainer>
+                {searchedVideos.map(eachVideo => (
+                  <VideoCard key={eachVideo.id} videoCardDetails={eachVideo} />
+                ))}
+              </VideosContainer>
+            </SearchVideosContainer>
+          )
+        }}
+      </ThemeChange.Consumer>
     )
   }
 
-  onRetry = () => {
-    this.getTrendingVideos()
-  }
-
-  renderFailureView = () => <FailureView onRetry={this.onRetry} />
+  renderFailureView = () => (
+    <NotFoundContainer>
+      <Image
+        src="https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-light-theme-img.png"
+        alt="failure view"
+        className="failure-view-gaming"
+      />
+      <Heading> Oops! Something Went Wrong</Heading>
+      <Desc className="failure-description-gaming">
+        We are having some trouble to complete your request. Please try again.
+      </Desc>
+      <NavLink>
+        <Retry className="button" type="button" onClick={this.getGamingVideos}>
+          Retry
+        </Retry>
+      </NavLink>
+    </NotFoundContainer>
+  )
 
   renderTrendingVideosView = () => {
     const {apiStatus} = this.state
@@ -109,27 +161,23 @@ class Trending extends Component {
     return (
       <ThemeChange.Consumer>
         {value => {
-          const {activeTheme, changeTheme} = value
+          const {activeTheme} = value
           const backgroundColor = activeTheme ? '#0f0f0f0f' : '#f9f9f9f9'
-          const color = activeTheme ? '#f9f9f9' : '#231f20'
 
           return (
-            <div data-testid="trending">
+            <div>
               <Header />
-              <NavigationBar />
-              <TrendingContainer
-                data-testid="trending"
+              <HomeContainer
+                data-test-id="home"
                 backgroundColor={backgroundColor}
-                onClick={changeTheme}
               >
-                <TrendingVideoTitle>
-                  <TrendingTitleIconContainer>
-                    <HiFire size={35} color="#ff0000" />
-                  </TrendingTitleIconContainer>
-                  <TrendingText color={color}>Trending</TrendingText>
-                </TrendingVideoTitle>
-                {this.renderGamingVideosView()}
-              </TrendingContainer>
+                <HomeStickyContainer>
+                  <SideBar />
+                </HomeStickyContainer>
+                <HomeSideContainer backgroundColor={backgroundColor}>
+                  {this.renderTrendingVideosView()}
+                </HomeSideContainer>
+              </HomeContainer>
             </div>
           )
         }}

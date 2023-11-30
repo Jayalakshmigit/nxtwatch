@@ -1,94 +1,87 @@
 import styled from 'styled-components'
-import {Link} from 'react-router-dom'
 
 export const NavbarHeader = styled.nav`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 60px;
-  width: 100%;
-  padding: 10px;
+  height: 50px;
+  padding: 30px;
+  padding-left: 30px;
+  padding-right: 30px;
+  position: sticky;
+  scroll-behavior: smooth;
   background-color: ${props => props.background};
-  position: fixed;
-  top: 0;
 
-  @media screen and (min-width: 768px) {
-    padding-left: 30px;
-    padding-right: 30px;
+  @media screen and (man-width: 768px) {
+    flex-direction: column;
   }
-`
-
-export const Login = styled(Link)`
-  text-decoration: none;
 `
 
 export const WebsiteLogo = styled.img`
-  height: 30px;
-  width: 80px;
+  width: 110px;
 
   @media screen and (min-width: 768px) {
-    height: 40px;
-    width: 100px;
+    width: 165px;
   }
 `
-export const ThemeContainer = styled.div`
+export const ThemeContainer = styled.ul`
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
+  list-style-type: none;
+  width: 15%;
+`
+
+export const ContentListItems = styled.li`
+  display: flex;
 `
 
 export const ProfileImage = styled.img`
   height: 30px;
   width: 30px;
   margin-right: 10px;
+  margin-left: 10px;
 `
 
 export const ThemeButton = styled.button`
-  border: none;
-  background: none;
-  margin-right: 10px;
-`
-
-export const LogoutIcon = styled.button`
-  border: none;
-  background: none;
-
-  @media screen and (min-width: 768px) {
-    display: none;
-  }
+  color: ${props => props.color};
+  border: 0px none;
+  background-color: transparent;
+  cursor: pointer;
 `
 
 export const LogoutButton = styled.button`
-  color: ${props => props.color};
-  background-color: ${props => props.backgroundColor};
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 600;
   font-family: 'Roboto';
-  border-color: ${props => props.color};
-  border: 1px solid;
-  padding-right: 10px;
-  padding-left: 10px;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  border-radius: 5px;
-  margin-left: 6px;
-
-  @media screen and (max-width: 768px) {
-    display: none;
-  }
+  background-color: #0967d2;
+  border: none;
+  border-radius: 4px;
+  margin-left: 14px;
+  outline: none;
+  cursor: pointer;
 `
 export const ModalContainer = styled.div`
   display: flex;
-  flex-direction: column;
   justify-content: space-between;
-  height: 150px;
-  width: 250px;
+  height: 200px;
+  width: 400px;
   background-color: #cbd5e1;
   border-radius: 10px;
-  padding: 20px;
+`
 
-  @media screen and (min-width: 768px) {
-    height: 200px;
-    width: 400px;
-  }
+export const AlignRow = styled.div`
+  display: flex;
+  justify-content: space-between;
+`
+
+export const AlignColumn = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #cbd5e1;
 `
 export const CloseButton = styled.button`
   color: #cbd5e1;
@@ -113,7 +106,7 @@ export const CloseButton = styled.button`
   }
 `
 
-export const LogoutDescription = styled.p`
+export const ModalDescription = styled.p`
   color: #000000;
   font-size: 15px;
   text-align: center;
@@ -140,16 +133,4 @@ export const ConfirmButton = styled.button`
   border-radius: 6px;
   outline: none;
   cursor: pointer;
-
-  @media screen and (min-width: 768px) {
-    font-size: 15px;
-    padding: 13px;
-    padding-left: 20px;
-    padding-right: 20px;
-  }
-`
-
-export const ButtonsContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
 `

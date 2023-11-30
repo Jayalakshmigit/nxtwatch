@@ -1,18 +1,45 @@
-import styled from 'styled-components'
 import {Link} from 'react-router-dom'
+import styled from 'styled-components'
+import {SearchVideosContainer} from '../Trending/styledComponents'
 
 export const SearchVideosContainer = styled.div`
   display: flex;
   flex-direction: column;
-  background-color: ${props => props.backgroundColor};
   overflow-y: scroll;
   padding: 30px;
+  background-color: ${props => props.backgroundColor};
 `
+
+export const SearchInput = styled.input`
+  width: 250px;
+  border: 1px solid #64748b;
+  border-radius: 2px;
+  margin-left: 60px;
+  padding: 3px;
+  padding-right: 10px;
+  padding-left: 10px;
+`
+
 export const VideosContainer = styled.ul`
   display: flex;
+  flex-direction: column;
   list-style-type: none;
   flex-wrap: wrap;
-  background-color: ${props => props.backgroundColor};
+`
+export const Image = styled.img`
+  width: 250px;
+  margin: 10px;
+`
+export const Heading = styled.h1`
+  color: ${props => props.color};
+  font-size: 30px;
+  margin: 15px;
+`
+
+export const Desc = styled.p`
+  color: ${props => props.color};
+  font-size: 20px;
+  margin: 15px;
 `
 export const LoaderContainer = styled.div`
   display: flex;
@@ -24,26 +51,6 @@ export const LoaderContainer = styled.div`
     width: 70%;
   }
 `
-
-export const HomeStickyContainer = styled.div`
-  position: sticky;
-  position: -webkit-sticky;
-`
-
-export const HomeSideContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  background-color: ${props => props.backgroundColor};
-  overflow-y: scroll;
-`
-
-export const HomeContainer = styled.div`
-  display: flex;
-  width: 100%;
-  background-color: ${props => props.backgroundColor};
-`
-
 export const NotFoundContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -51,22 +58,6 @@ export const NotFoundContainer = styled.div`
   align-items: center;
   height: 100vh;
   background-color: #ffffff;
-`
-
-export const Image = styled.img`
-  width: 300px;
-  margin: 20px;
-`
-
-export const Heading = styled.h1`
-  color: #000000;
-  font-size: 30px;
-  text-align: center;
-`
-export const Desc = styled.p`
-  color: #000000;
-  font-size: 20px;
-  text-align: center;
 `
 
 export const Retry = styled.button`

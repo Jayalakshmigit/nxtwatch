@@ -33,12 +33,8 @@ class Login extends Component {
     this.setState({password: event.target.value})
   }
 
-  onShowPassword = event => {
-    if (event.target.checked) {
-      this.setState({showPassword: true})
-    } else {
-      this.setState({showPassword: false})
-    }
+  onShowPassword = () => {
+    this.setState(prevState => ({showPassword: !prevState.showPassword}))
   }
 
   onSubmitSuccess = jwtToken => {
@@ -58,7 +54,7 @@ class Login extends Component {
     event.preventDefault()
     const {username, password} = this.state
     const userDetails = {username, password}
-    const url = 'https://apis.ccbp.in/login'
+    const url = `https://apis.ccbp.in/login`
     const options = {
       method: 'POST',
       body: JSON.stringify(userDetails),
@@ -90,12 +86,12 @@ class Login extends Component {
 
   renderPassword = () => {
     const {password, showPassword} = this.state
-    const passwordType = showPassword ? 'text' : 'password'
+
     return (
       <>
         <LabelEl htmlFor="password">PASSWORD</LabelEl>
         <InputEl
-          type={passwordType}
+          type={showPassword ? 'text' : 'password'}
           id="password"
           placeholder="Password"
           value={password}
@@ -105,6 +101,7 @@ class Login extends Component {
           <Checkbox
             type="checkbox"
             id="checkbox"
+            checked={showPassword}
             onChange={this.onShowPassword}
           />
           <ShowPassword htmlFor="checkbox">Show Password</ShowPassword>
