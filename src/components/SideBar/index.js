@@ -43,7 +43,7 @@ class SideBar extends Component {
         }
 
         return
-        ;<>
+        <>
           <SideBarContainer>
             <NavItemsContainer>
               <NavTextItemContainer

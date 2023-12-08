@@ -1,13 +1,14 @@
 import React from 'react'
 
 const ThemeChange = React.createContext({
-  activeTheme: 'light',
+  activeTheme: 'Light',
   changeTheme: () => {},
 
   savedVideos: [],
   addToSaveVideos: () => {},
 
-  activeTab: 'Home',
+  activeTab: '',
+  activeTabItem: () => {},
   changeTab: () => {},
   removeSaveVideos: () => {},
 })

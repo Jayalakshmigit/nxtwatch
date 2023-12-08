@@ -20,10 +20,6 @@ class App extends Component {
     activeTab: 'HOME',
   }
 
-  changeTab = tab => {
-    this.setState({activeTab: tab})
-  }
-
   changeTheme = () => {
     this.setState(prevState => ({
       activeTheme: !prevState.activeTheme,
@@ -34,12 +30,12 @@ class App extends Component {
     const {savedVideos} = this.state
     const videoObject = savedVideos.find(eachVideo => eachVideo.id === video.id)
 
-   if(videoObject){
-       this.setState(prevState=>({savedVideos:[...prevState.savedVideos],
-    }))
-   }else{
-    this.setState({savedVideos:[...savedVideos,video]})
-   }
+    if (videoObject) {
+      this.setState(prevState => ({savedVideos: [...prevState.savedVideos]}))
+    } else {
+      this.setState({savedVideos: [...savedVideos, video]})
+    }
+  }
 
   removeSaveVideos = id => {
     const {savedVideos} = this.state
@@ -48,20 +44,25 @@ class App extends Component {
     )
     this.setState({savedVideos: updatedSavedVideos})
   }
-  
-  render(){
+
+  activeTabItem = tab => {
+    this.setState({activeTab: tab})
+  }
+
+  render() {
     const {savedVideos, activeTheme, activeTab} = this.state
 
     return (
       <ThemeChange.Provider
         value={{
-          savedVideos,
           activeTheme,
+          savedVideos,
+
+          addToSaveVideos: this.addToSaveVideos,
+          activeTabItem: this.activeTabItem,
           activeTab,
           changeTheme: this.changeTheme,
-          removeSaveVideos:this.removeSaveVideos
-          addToSaveVideos: this.addToSaveVideo,
-          changeTab: this.changeTab,
+          removeSaveVideos: this.removeSaveVideos,
         }}
       >
         <Switch>

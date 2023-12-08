@@ -1,9 +1,8 @@
 import {Component} from 'react'
-
-import {IoMoClose} from 'react-icons/io'
-
-import Header from '../Header'
+import {IoMdClose} from 'react-icons/io'
 import SideBar from '../SideBar'
+import Header from '../Header'
+
 import ThemeChange from '../../context/ThemeChange'
 import SearchVideos from '../SearchVideos'
 
@@ -47,7 +46,7 @@ class Home extends Component {
             data-testid="close"
             onClick={this.onCloseBanner}
           >
-            <IoMoClose size={20} color="#231f20" />
+            <IoMdClose size={20} />
           </CloseButton>
         </BannerImageContainer>
         <SearchVideos />
