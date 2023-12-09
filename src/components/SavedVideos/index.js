@@ -1,4 +1,3 @@
-import {Component} from 'react'
 import {Loader} from 'react-loader-spinner'
 import {AiFillFire} from 'react-icons/ai'
 import Header from '../Header'
@@ -71,33 +70,30 @@ const SavedVideos = () => {
     </LoaderContainer>
   )
 
-  render(){
-    return (
-      <ThemeChange.Consumer>
-        {value => {
-          const {activeTheme} = value
-          const backgroundColor = activeTheme ? '#0f0f0f0f' : '#f9f9f9f9'
+    render(){
+     return (
+    <ThemeChange.Consumer>
+      {value => {
+        const {activeTheme} = value
+        const backgroundColor = activeTheme ? '#0f0f0f0f' : '#f9f9f9f9'
 
-          return (
-            <div data-testid="savedVideos">
-              <Header />
-              <HomeContainer
-                data-testid="home"
-                backgroundColor={backgroundColor}
-              >
-                <HomeStickyContainer>
-                  <SideBar />
-                </HomeStickyContainer>
-                <HomeSideContainer backgroundColor={backgroundColor}>
-                  {this.renderSavedVideos()}
-                </HomeSideContainer>
-              </HomeContainer>
-            </div>
-          )
-        }}
-      </ThemeChange.Consumer>
-    )
-  }
+        return (
+          <div data-testid="savedVideos">
+            <Header />
+            <HomeContainer data-testid="home" backgroundColor={backgroundColor}>
+              <HomeStickyContainer>
+                <SideBar />
+              </HomeStickyContainer>
+              <HomeSideContainer backgroundColor={backgroundColor}>
+                {this.renderSavedVideos()}
+              </HomeSideContainer>
+            </HomeContainer>
+          </div>
+        )
+      }}
+    </ThemeChange.Consumer>
+  )
+}
 }
 
 export default SavedVideos

@@ -42,8 +42,7 @@ class SideBar extends Component {
           changeTab('SAVED VIDEOS')
         }
 
-        return
-        <>
+        return (
           <SideBarContainer>
             <NavItemsContainer>
               <NavTextItemContainer
@@ -152,9 +151,9 @@ class SideBar extends Component {
                   Enjoy! Now to see your channels and recommendations!
                 </NavItemText>
               </SideBarBottomContainer>
-              </>
-           
-        </SideBarContainer>
+            </NavItemsContainer>
+          </SideBarContainer>
+        )
       }}
     </ThemeChange.Consumer>
   )
