@@ -84,7 +84,6 @@ const Header = props => {
                     <ModalContainer>
                       <AlignColumn>
                         <ModalDescription>
-                          {' '}
                           Are you sure, you want yo logout
                         </ModalDescription>
                         <AlignRow>

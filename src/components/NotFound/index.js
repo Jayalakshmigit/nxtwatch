@@ -13,13 +13,13 @@ const NotFound = () => (
       const {activeTheme} = value
       const backgroundColor = activeTheme ? '#ffffff' : '#000000'
       const color = activeTheme ? '#000000' : '#ffffff'
-      const imageUrl = activeTheme
+      const NotFoundImage = activeTheme
         ? '"https://assets.ccbp.in/frontend/react-js/nxt-watch-not-found-light-theme-img.png"'
         : 'https://assets.ccbp.in/frontend/react-js/nxt-watch-not-found-dark-theme-img.png'
 
       return (
         <NotFoundContainer backgroundColor={backgroundColor}>
-          <NotFoundImageEl src={imageUrl} alt="not found" />
+          <NotFoundImageEl src={NotFoundImage} alt="not found" />
           <NotFoundHeading color={color}>Page Not Found</NotFoundHeading>
           <NotFoundParagraph color={color}>
             We are sorry, the page you requested could not be found.
